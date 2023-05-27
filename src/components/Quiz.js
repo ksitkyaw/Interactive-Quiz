@@ -1,10 +1,15 @@
 import React, { useState } from 'react';
+import {useAppDispatch, useAppSelector} from "../redux/app/hooks.ts"
+import MOCK_DATA from "../data.json"
+import { setSelectedChoice } from '../redux/features/quizSlice';
 
-const Quiz = ({data: quizData, selectedChoice, setSelectedChoice, endOfQuiz}) => {
-  
+const Quiz = () => {
+  const {currentQuizID, selectedChoice, endOfQuiz} = useAppSelector(state => state.quiz.value)
+  const dispatch = useAppDispatch()
+  const quizData = MOCK_DATA[currentQuizID]
 
-  const handleChoiceSelection = (choiceId) => {
-    setSelectedChoice(choiceId);
+  const handleChoiceSelection = (choiceID) => {
+    dispatch(setSelectedChoice(choiceID));
   };
 
   return (
