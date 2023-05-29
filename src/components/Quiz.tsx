@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import {useAppDispatch, useAppSelector} from "../redux/app/hooks.ts"
+import {useAppDispatch, useAppSelector} from "../redux/app/hooks"
 import MOCK_DATA from "../data.json"
 import { setSelectedChoice } from '../redux/features/quizSlice';
 
@@ -8,7 +8,7 @@ const Quiz = () => {
   const dispatch = useAppDispatch()
   const quizData = MOCK_DATA[currentQuizID]
 
-  const handleChoiceSelection = (choiceID) => {
+  const handleChoiceSelection = (choiceID: string) => {
     dispatch(setSelectedChoice(choiceID));
   };
 

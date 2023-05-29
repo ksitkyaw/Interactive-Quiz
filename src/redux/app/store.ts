@@ -1,11 +1,13 @@
 import { configureStore } from '@reduxjs/toolkit'
 import quizSlice from '../features/quizSlice'
 import scoreSlice from '../features/scoreSlice'
+import resultSlice from '../features/resultSlice'
 
 export const store = configureStore({
   reducer: {
     quiz: quizSlice,
-    score: scoreSlice
+    score: scoreSlice,
+    result: resultSlice
   },
 })
 

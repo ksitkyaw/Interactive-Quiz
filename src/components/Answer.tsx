@@ -3,17 +3,28 @@ import { useAppDispatch, useAppSelector } from '../redux/app/hooks'
 import MOCK_DATA from "../data.json"
 import { quizIDIncrement } from '../redux/features/quizSlice';
 import { setEndOfQuiz } from '../redux/features/quizSlice';
+import { v4 as uuidv4 } from 'uuid';
 
-export default function Answer({setShowAnswer}) {
+interface Props {
+  setShowAnswer: React.Dispatch<React.SetStateAction<boolean>>,
+  setPlayCountdown: React.Dispatch<React.SetStateAction<string>>,
+  playCountdown: string,
+  setIsPaused: React.Dispatch<React.SetStateAction<boolean>>
+}
+
+export default function Answer({setShowAnswer, setPlayCountdown, playCountdown, setIsPaused}: Props) {
     const dispatch = useAppDispatch()
     const score = useAppSelector(state => state.score.value);
     const {currentQuizID, selectedChoice, endOfQuiz} = useAppSelector(state => state.quiz.value)
     const quizData = MOCK_DATA[currentQuizID]
     const quizLength = MOCK_DATA.length
+
     const handleNext = () => {
         if (currentQuizID < quizLength-1) {
             dispatch(quizIDIncrement())
             setShowAnswer(false)
+            setPlayCountdown(uuidv4())
+            setIsPaused(false)
           } else {
             setShowAnswer(false)
             dispatch(setEndOfQuiz(true))
