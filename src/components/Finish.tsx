@@ -16,7 +16,7 @@ export default function Finish({name}: Props) {
         <p className="text-lg text-center">Your total score is </p> 
         <p className='text-center'><span className='text-3xl'>{score}</span> out of {result.length}!!!</p>
         <div className="flex justify-center items-center">
-            <div className="mr-7 flex justify-center items center">
+            <div className="mr-7 flex flex-col justify-center items center">
                 <div className="w-24 m-3 flex flex-col justify-center items-center">
                     <CircularProgressbar
                         value={5}

@@ -8,11 +8,9 @@ import Finish from './Finish'
 export default function Result() {
     const [name, setName] = useState('')
     const result = useAppSelector(state => state.result)
-    const score = useAppSelector(state => state.score.value)
     const navigate = useNavigate()
     const myRef = useRef<HTMLDivElement>(null);
     const ansRef = useRef<HTMLDivElement>(null);
-    // const inputRef = useRef<HTMLInputElement>()
     console.log(result)
     const downloadImage = async (nodeRef : Node) => {
     
@@ -25,24 +23,6 @@ export default function Result() {
       });
     }
 
-    // const handleSubmit = (e : React.SyntheticEvent) => {
-    //   e.preventDefault();
-    //   setName(inputRef.current?.value)
-    // }
-
-    //   try {
-    //     const dataUrl = await domtoimage.toPng(resultRef.current);
-    //     const link = document.createElement('a');
-    //     link.href = dataUrl;
-    //     link.download = 'image.png'; // Set the desired file name
-    //     link.click();
-    //   } catch (error) {
-    //     console.error('Error generating image:', error);
-    //   } finally {
-    //     // Reset the CSS filter after generating the image
-    //     resultRef.current.style.filter = 'none';
-    //   }
-    // };
 
   return (
     <>
@@ -55,7 +35,6 @@ export default function Result() {
             Go Back
           </button>
           <h1 className="text-2xl text-center mb-5">Enter Your Name for a more personalized result</h1>
-          {/* <form onSubmit={(e : React.SyntheticEvent) => handleSubmit(e)}> */}
             <input 
             value={name}
             className="p-2  rounded-full border-slate-500 mb-3"
@@ -65,21 +44,19 @@ export default function Result() {
             >
 
             </input>
-            {/* <input type="submit" className="p-2 rounded-full bg-blue-300" value="Submit"/> */}
-          {/* </form> */}
           
           <div  ref={myRef} className="mb-5 w-3/4 flex flex-col justify-center items-center">
             <Finish name={name}/>
-            <button
+          </div>
+          <button
               className={`bg-slate-600 text-blue-300 px-4 py-2 rounded mr-7 mt-2`}
               onClick={() => downloadImage(myRef.current as Node)}
             >
               Download Result
             </button>
-          </div>
           <div ref={ansRef} className="w-3/4 bg-[#AEE2FF] p-3 mb-3">
             <p>Name - {name}</p>
-            <ul className="flex flex-wrap gap-3 justify-around items-center my-2">
+            <ul className="my-2">
             {result.map((res, index )=> {
               return (
                 <li key={res.id} className="flex justify-start items-center mx-7">

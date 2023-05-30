@@ -16,7 +16,7 @@ const Container = () => {
   const result = useAppSelector(state => state.result)
   const [showAnswer, setShowAnswer] = useState(false)
   const [playCountdown, setPlayCountdown] = useState("")
-  const [isPaused, setIsPaused] = useState(false)
+  const [isPaused, setIsPaused] = useState(true)
 
   useEffect(() => {
     if (result.length === 0) {
@@ -24,7 +24,17 @@ const Container = () => {
         dispatch(addData(data))
       })
     }
-  }, [])
+    if (!isPaused) {
+      setIsPaused(true)
+    }
+    const timer = setTimeout(() => {
+      setIsPaused(false)
+    }, 3500)
+
+    return () => {
+      clearTimeout(timer)
+    }
+  }, [currentQuizID])
 
 
   const renderTime = (remainingTime : number) => {
@@ -34,10 +44,10 @@ const Container = () => {
 
     //todo - styling
     return (
-      <div className="timer">
-        <div className="text">Remaining</div>
-        <div className="value">{remainingTime}</div>
-        <div className="text">seconds</div>
+      <div className="flex flex-col justify-center items-center">
+        <div className="text-slate-500">Remaining</div>
+        <div className="text-slate-500">{remainingTime}</div>
+        <div className="text-slate-500">seconds</div>
       </div>
     );
   };
@@ -63,7 +73,7 @@ const Container = () => {
       animate={{opacity: 1}}
       transition={{duration: 2}}
       className="w-3/5 min p-4 my-4 rounded-3xl bg-[#C4DFDF] shadow-[-4px -5px 12px 0px rgba(0,0,0,0.46) inset]">
-        <ProgressBar bgColor='#9BA4B5' completed={(currentQuizID + 1) * 10}/>
+        <ProgressBar bgColor='#93c4fd' completed={(currentQuizID + 1) * 10}/>
         {showAnswer ? 
           <Answer 
           setShowAnswer={setShowAnswer}
@@ -78,7 +88,7 @@ const Container = () => {
               key={playCountdown}
               isPlaying={!isPaused}
               duration={700}
-              colors={['#009EFF', '#F7B801', '#A30000', '#A30000']}
+              colors={['#93c4fd', '#F7B801', '#A30000', '#A30000']}
               colorsTime={[7, 5, 2, 0]}
               onComplete={handleTimeUp}
             >

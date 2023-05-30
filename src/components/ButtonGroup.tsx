@@ -7,6 +7,7 @@ import { quizIDReset, setEndOfQuiz } from '../redux/features/quizSlice';
 import { useNavigate } from 'react-router-dom';
 import { addResult } from '../redux/features/resultSlice';
 import { Howl } from "howler";
+import { motion } from 'framer-motion';
 
 interface ButtonProps {
   setShowAnswer: React.Dispatch<React.SetStateAction<boolean>>,
@@ -77,29 +78,35 @@ const ButtonGroup = ({setShowAnswer, isPaused, setIsPaused} : ButtonProps) => {
       </div>
       {endOfQuiz ? 
       <>
-        <button
-          className={"bg-transparent hover:bg-blue-500 text-blue-500 font-semibold hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent rounded"}
+        <motion.button
+          whileHover={{scale:1.05}}
+          whileTap={{scale: 0.9}}
+          className={"bg-transparent hover:bg-slate-500 text-slate-500 font-semibold hover:text-blue-300 py-2 px-4 border border-blue-500 hover:border-transparent rounded"}
           onClick={handleRestart}
         >
           Restart Quiz
-        </button>
-        <button
-          className={`bg-transparent hover:bg-blue-500 text-blue-500 font-semibold hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent rounded`}
+        </motion.button>
+        <motion.button
+          whileHover={{scale:1.05}}
+          whileTap={{scale: 0.9}}
+          className={`bg-transparent hover:bg-slate-500 text-slate-500 font-semibold hover:text-blue-300 py-2 px-4 border border-blue-500 hover:border-transparent rounded`}
           onClick={() => {
             navigate('/results')
             soundCue(resultSound)
           }}
         >
           See Results
-        </button>
+        </motion.button>
       </> : 
-      <button
+      <motion.button
+        whileHover={{scale:1.05}}
+        whileTap={{scale: 0.9}}
       disabled={endOfQuiz ? true : false}
-      className={`bg-transparent hover:bg-blue-500 text-blue-500 font-semibold hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent rounded ${endOfQuiz ? "cursor-not-allowed opacity-50" : ''}`}
+      className={`bg-transparent hover:bg-slate-500 text-slate-500 font-semibold hover:text-blue-300 py-2 px-4 border border-blue-500 hover:border-transparent rounded ${endOfQuiz ? "cursor-not-allowed opacity-50" : ''}`}
       onClick={handleCheck}
     >
       Check Answer
-    </button>}
+    </motion.button>}
       
     </div>
   );

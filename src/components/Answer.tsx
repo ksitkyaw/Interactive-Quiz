@@ -6,6 +6,7 @@ import { setEndOfQuiz } from '../redux/features/quizSlice';
 import { v4 as uuidv4 } from 'uuid';
 import Feedback from './Feedback';
 import { Howl } from 'howler';
+import { motion } from 'framer-motion';
 
 interface Props {
   setShowAnswer: React.Dispatch<React.SetStateAction<boolean>>,
@@ -46,13 +47,15 @@ export default function Answer({setShowAnswer, setPlayCountdown, playCountdown, 
       <div className="border rounded px-4 py-2">
         Score: <span className="font-bold">{score}</span>
       </div>
-      <button
+      <motion.button
+        whileHover={{scale:1.05}}
+        whileTap={{scale: 0.9}}
         disabled={endOfQuiz ? true : false}
-        className={`bg-transparent hover:bg-blue-500 text-blue-500 font-semibold hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent rounded ${endOfQuiz ? "cursor-not-allowed opacity-50" : ''}`}
+        className={`bg-transparent hover:bg-slate-500 text-blue-500 font-semibold hover:text-blue-300 py-2 px-4 border border-blue-500 hover:border-transparent rounded ${endOfQuiz ? "cursor-not-allowed opacity-50" : ''}`}
         onClick={handleNext}
       >
         Next
-      </button>
+      </motion.button>
     </div>
     </>
   )
