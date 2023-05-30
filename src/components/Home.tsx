@@ -1,9 +1,14 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
+import {Howl} from 'howler';
 
 const Home = () => {
 
     const navigate = useNavigate();
+    const sound = new Howl({
+      src: ["play.wav"]
+    })
+
   return (
     <div className="flex flex-col items-center justify-center h-screen">
       <img
@@ -11,7 +16,12 @@ const Home = () => {
         alt="Quiz Logo"
         className="h-32 w-32 mb-8" // Adjust the height and width of the logo
       />
-      <button onClick={() => navigate('/quiz')} className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+      <button onClick={() => {
+        navigate('/quiz')
+        sound.play()
+        }} 
+        className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+      >
         Play
       </button>
     </div>

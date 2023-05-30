@@ -57,6 +57,7 @@ export const resultSlice = createSlice({
   // `createSlice` will infer the state type from the `initialState` argument
   initialState,
   reducers: {
+    resetData: (state) => {},
     addData: (state, action: PayloadAction<ResultState>) => {
         state.push(action.payload)
     },
@@ -70,7 +71,7 @@ export const resultSlice = createSlice({
   },
 })
 
-export const {addData, addResult} = resultSlice.actions
+export const {resetData, addData, addResult} = resultSlice.actions
 
 // Other code such as selectors can use the imported `RootState` type
 export const selectResult = (state: RootState) => state.result
