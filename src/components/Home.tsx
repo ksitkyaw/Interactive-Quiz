@@ -41,7 +41,7 @@ const Home = () => {
         }} 
         whileHover={{scale:1.05, boxShadow: '2px 4px 10px 0px rgba(0,0,0,0.61)'}}
         whileTap={{scale: 0.9}}
-        className="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded-full w-24 h-24"
+        className="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded-2xl w-20 h-12 shadow-lg mt-5"
       >
         <FontAwesomeIcon size='xl' icon={faPlay}/>
       </motion.button>

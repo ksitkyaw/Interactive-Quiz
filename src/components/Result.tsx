@@ -64,8 +64,9 @@ export default function Result() {
               </motion.button>
               <FacebookShareButton 
               style={{backgroundColor: '#93c4fd', padding: '8px 4px', color: 'gray', borderRadius:'4px', margin: '8px'}}
-              url="http://localhost:3000/results" 
-              quote={`I score ${score} on the quiz.`}>
+              url="https://64772d3a06c6800a7d070b46--dynamic-alfajores-2b0e51.netlify.app/" 
+              quote={`I score ${score} on the quiz.`}
+              hashtag='#quiz'>
                 Share to Facebook
               </FacebookShareButton>
           </div>

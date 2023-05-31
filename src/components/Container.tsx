@@ -81,7 +81,7 @@ const Container = () => {
               isPlaying={!isPaused}
               duration={60}
               colors={['#93c4fd', '#F7B801', '#A30000', '#A30000']}
-              colorsTime={[7, 5, 2, 0]}
+              colorsTime={[30, 20, 9, 0]}
               onComplete={handleTimeUp}
             >
               {({ remainingTime }) => renderTime(remainingTime)}
