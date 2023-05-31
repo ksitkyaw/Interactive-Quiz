@@ -79,7 +79,7 @@ const Container = () => {
             <CountdownCircleTimer
               key={playCountdown}
               isPlaying={!isPaused}
-              duration={700}
+              duration={60}
               colors={['#93c4fd', '#F7B801', '#A30000', '#A30000']}
               colorsTime={[7, 5, 2, 0]}
               onComplete={handleTimeUp}
