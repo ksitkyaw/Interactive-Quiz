@@ -1,6 +1,5 @@
 import React from 'react';
 import {useAppDispatch, useAppSelector} from "../redux/app/hooks"
-import MOCK_DATA from "../data.json"
 import { setSelectedChoice } from '../redux/features/quizSlice';
 import { motion } from 'framer-motion';
 import Completion from './Completion';
@@ -8,7 +7,8 @@ import Completion from './Completion';
 const Quiz = () => {
   const {currentQuizID, selectedChoice, endOfQuiz} = useAppSelector(state => state.quiz.value)
   const dispatch = useAppDispatch()
-  const quizData = MOCK_DATA[currentQuizID]
+  const result = useAppSelector(state => state.result)
+  const quizData = result[currentQuizID]
 
   const handleChoiceSelection = (choiceID: string) => {
     dispatch(setSelectedChoice(choiceID));
@@ -22,7 +22,7 @@ const Quiz = () => {
         <ul className="space-y-2">
           {quizData.choices.map((choice, index) => (
             <motion.li
-              whileHover={{scale: 1.04, transition: {duration: 0.4}}}
+              whileHover={{scale: 1.04, boxShadow: '1px 1px 3px 0px rgba(0,0,0,0.61)', transition: {duration: 0.4}}}
               initial={{y: "100vh", opacity: 0}}
               animate={{ y: 0, opacity: 1}}
               transition={{duration: 2+index*0.5}}

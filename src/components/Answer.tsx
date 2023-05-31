@@ -1,6 +1,5 @@
 import React from 'react'
 import { useAppDispatch, useAppSelector } from '../redux/app/hooks'
-import MOCK_DATA from "../data.json"
 import { quizIDIncrement } from '../redux/features/quizSlice';
 import { setEndOfQuiz } from '../redux/features/quizSlice';
 import { v4 as uuidv4 } from 'uuid';
@@ -18,9 +17,9 @@ interface Props {
 export default function Answer({setShowAnswer, setPlayCountdown, playCountdown, setIsPaused}: Props) {
     const dispatch = useAppDispatch()
     const score = useAppSelector(state => state.score.value);
-    const {currentQuizID, selectedChoice, endOfQuiz} = useAppSelector(state => state.quiz.value)
-    const quizData = MOCK_DATA[currentQuizID]
-    const quizLength = MOCK_DATA.length
+    const {currentQuizID, endOfQuiz} = useAppSelector(state => state.quiz.value)
+    const result = useAppSelector(state => state.result)
+    const quizLength = result.length
     const nextSound = new Howl({
       src: ["next.mp3"]
     })
@@ -48,7 +47,7 @@ export default function Answer({setShowAnswer, setPlayCountdown, playCountdown, 
         Score: <span className="font-bold">{score}</span>
       </div>
       <motion.button
-        whileHover={{scale:1.05}}
+        whileHover={{scale:1.05, boxShadow: '2px 4px 10px 0px rgba(0,0,0,0.61)'}}
         whileTap={{scale: 0.9}}
         disabled={endOfQuiz ? true : false}
         className={`bg-transparent hover:bg-slate-500 text-blue-500 font-semibold hover:text-blue-300 py-2 px-4 border border-blue-500 hover:border-transparent rounded ${endOfQuiz ? "cursor-not-allowed opacity-50" : ''}`}

@@ -4,10 +4,13 @@ import domtoimage from 'dom-to-image'
 import FileSaver from 'file-saver'
 import { useNavigate } from 'react-router-dom'
 import Finish from './Finish'
+import { FacebookShareButton } from 'react-share'
+import { motion } from 'framer-motion'
 
 export default function Result() {
     const [name, setName] = useState('')
     const result = useAppSelector(state => state.result)
+    const score = useAppSelector(state => state.score.value)
     const navigate = useNavigate()
     const myRef = useRef<HTMLDivElement>(null);
     const ansRef = useRef<HTMLDivElement>(null);
@@ -28,12 +31,14 @@ export default function Result() {
     <>
       <div className="w-full bg-slate-500 flex flex-col justify-center items-center">
         <div className="lg:w-[80%] w-full bg-slate-100 flex flex-col justify-center items-center relative">
-        <button
+        <motion.button
+          whileHover={{scale:1.05, boxShadow: '2px 4px 10px 0px rgba(0,0,0,0.61)'}}
+          whileTap={{scale: 0.9}}
             className={`bg-slate-600 text-blue-300 0 px-4 py-2 rounded m-3 absolute left-2 top-2 lg:block hidden`}
             onClick={() => {navigate('/quiz')}}
           >
             Go Back
-          </button>
+          </motion.button>
           <h1 className="sm:text-2xl text-xl text-center mb-5">Enter Your Name for a more personalized result</h1>
             <input 
             value={name}
@@ -48,12 +53,23 @@ export default function Result() {
           <div  ref={myRef} className="mb-5 lg:w-3/4 w-full flex flex-col justify-center items-center">
             <Finish name={name}/>
           </div>
-          <button
-              className={`bg-slate-600 text-blue-300 px-4 py-2 rounded mr-7 mt-2`}
-              onClick={() => downloadImage(myRef.current as Node)}
-            >
-              Download Result
-            </button>
+          <div className="flex justify-center items-center">
+            <motion.button
+              whileHover={{scale:1.05, boxShadow: '2px 4px 10px 0px rgba(0,0,0,0.61)'}}
+          whileTap={{scale: 0.9}}
+                className={`bg-slate-600 text-blue-300 px-4 py-2 rounded mr-7 my-2`}
+                onClick={() => downloadImage(myRef.current as Node)}
+              >
+                Download Result
+              </motion.button>
+              <FacebookShareButton 
+              style={{backgroundColor: '#93c4fd', padding: '8px 4px', color: 'gray', borderRadius:'4px', margin: '8px'}}
+              url="http://localhost:3000/results" 
+              quote={`I score ${score} on the quiz.`}>
+                Share to Facebook
+              </FacebookShareButton>
+          </div>
+          
           <div ref={ansRef} className="lg:w-3/4 w-full bg-[#AEE2FF] p-3 mb-3">
             <p>Name - {name}</p>
             <ul className="my-2">
@@ -72,12 +88,14 @@ export default function Result() {
             })}
             </ul>
           </div>
-          <button
+          <motion.button
+            whileHover={{scale:1.05, boxShadow: '2px 4px 10px 0px rgba(0,0,0,0.61)'}}
+          whileTap={{scale: 0.9}}
             className={`bg-slate-600 text-blue-300 px-4 py-2 rounded`}
             onClick={() => downloadImage(ansRef.current as Node)}
           >
             Download Answer
-          </button> 
+          </motion.button> 
         </div>
         
       </div>

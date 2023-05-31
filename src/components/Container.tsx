@@ -1,29 +1,21 @@
 import React, {useState, useEffect} from 'react';
 import Quiz from './Quiz';
 import ButtonGroup from './ButtonGroup';
-import MOCK_DATA from "../data.json";
 import Answer from './Answer';
 import { CountdownCircleTimer } from 'react-countdown-circle-timer';
 import ProgressBar from '@ramonak/react-progress-bar';
 import { useAppDispatch, useAppSelector } from '../redux/app/hooks';
 import { setSelectedChoice } from '../redux/features/quizSlice';
-import { addData, resetData } from '../redux/features/resultSlice';
 import { motion } from 'framer-motion';
 
 const Container = () => {
   const dispatch = useAppDispatch()
   const {currentQuizID, endOfQuiz} = useAppSelector(state => state.quiz.value)
-  const result = useAppSelector(state => state.result)
   const [showAnswer, setShowAnswer] = useState(false)
   const [playCountdown, setPlayCountdown] = useState("")
   const [isPaused, setIsPaused] = useState(true)
 
   useEffect(() => {
-    if (result.length === 0) {
-      MOCK_DATA.map(data => {
-        dispatch(addData(data))
-      })
-    }
     if (!isPaused) {
       setIsPaused(true)
     }
@@ -66,9 +58,9 @@ const Container = () => {
       className="text-center sm:text-5xl text-3xl mb-3 text-slate-700">
         The Interactive Quiz
       </motion.h1>
-      {/* <h2 className="text-center text-lg text-slate-500 mb-3">Guess the correct answer for each quiz, get a perfect score to receive a present</h2> */}
       <motion.div 
       id="quiz"
+      style={{boxShadow: "-4px -5px 12px 0px rgba(0,0,0,0.46) inset"}}
       initial={{opacity: 0}}
       animate={{opacity: 1}}
       transition={{duration: 2}}

@@ -1,5 +1,4 @@
 import React from 'react';
-import MOCK_DATA from "../data.json";
 import { useAppDispatch, useAppSelector } from '../redux/app/hooks';
 // import { setEndOfQuiz } from '../redux/features/quizSlice';
 import { scoreIncrement, scoreReset } from '../redux/features/scoreSlice';
@@ -19,10 +18,10 @@ const ButtonGroup = ({setShowAnswer, isPaused, setIsPaused} : ButtonProps) => {
   const dispatch = useAppDispatch();
   const score = useAppSelector(state => state.score.value);
   const {currentQuizID, selectedChoice, endOfQuiz} = useAppSelector(state => state.quiz.value)
+  const result = useAppSelector(state => state.result)
   const navigate = useNavigate()
-  const quizLength = MOCK_DATA.length
-  const data = MOCK_DATA[currentQuizID]
-  const newdata = useAppSelector(state => state.result)
+  const quizLength = result.length
+  const data = result[currentQuizID]
   const correctSound = new Howl({
     src: ["correct.wav"]
   })
@@ -51,7 +50,7 @@ const ButtonGroup = ({setShowAnswer, isPaused, setIsPaused} : ButtonProps) => {
       }
       setShowAnswer(true)
       setIsPaused(!isPaused)
-      dispatch(addResult({id: MOCK_DATA[currentQuizID]?.id, selectedChoice: selectedChoice}))
+      dispatch(addResult({id: result[currentQuizID]?.id, selectedChoice: selectedChoice}))
       // dispatch(quizIDIncrement())
     }
   };
@@ -77,19 +76,19 @@ const ButtonGroup = ({setShowAnswer, isPaused, setIsPaused} : ButtonProps) => {
         Score: <span className="font-bold text-slate-600">{score}</span>
       </div>
       {endOfQuiz ? 
-      <>
+      <div className='flex flex-wrap sm:block'>
         <motion.button
-          whileHover={{scale:1.05}}
+          whileHover={{scale:1.05, shadow: '2px 4px 10px 0px rgba(0,0,0,0.61)'}}
           whileTap={{scale: 0.9}}
-          className={"bg-transparent hover:bg-slate-500 text-slate-500 font-semibold hover:text-blue-300 py-2 px-4 border border-blue-500 hover:border-transparent rounded"}
+          className={" mb-2 mr-3 bg-transparent hover:bg-slate-500 text-slate-500 font-semibold hover:text-blue-300 py-2 px-4 border border-blue-500 hover:border-transparent rounded"}
           onClick={handleRestart}
         >
           Restart Quiz
         </motion.button>
         <motion.button
-          whileHover={{scale:1.05}}
+          whileHover={{scale:1.05, boxShadow: '2px 4px 10px 0px rgba(0,0,0,0.61)'}}
           whileTap={{scale: 0.9}}
-          className={`bg-transparent hover:bg-slate-500 text-slate-500 font-semibold hover:text-blue-300 py-2 px-4 border border-blue-500 hover:border-transparent rounded`}
+          className={`mb-2 mr-3 bg-transparent hover:bg-slate-500 text-slate-500 font-semibold hover:text-blue-300 py-2 px-4 border border-blue-500 hover:border-transparent rounded`}
           onClick={() => {
             navigate('/results')
             soundCue(resultSound)
@@ -97,9 +96,9 @@ const ButtonGroup = ({setShowAnswer, isPaused, setIsPaused} : ButtonProps) => {
         >
           See Results
         </motion.button>
-      </> : 
+      </div> : 
       <motion.button
-        whileHover={{scale:1.05}}
+        whileHover={{scale:1.05, boxShadow: '2px 4px 10px 0px rgba(0,0,0,0.61)'}}
         whileTap={{scale: 0.9}}
       disabled={endOfQuiz ? true : false}
       className={`bg-transparent hover:bg-slate-500 text-slate-500 font-semibold hover:text-blue-300 py-2 px-4 border border-blue-500 hover:border-transparent rounded ${endOfQuiz ? "cursor-not-allowed opacity-50" : ''}`}
