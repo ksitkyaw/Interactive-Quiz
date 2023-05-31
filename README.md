@@ -1,6 +1,7 @@
 # Interactive Quiz
 
 Welcome to the Interactive Quiz repository! This project is a Create React App application.
+The deployed version of the app is available at [Interactive Quiz](https://interactive-quiz-0101.netlify.app/)
 
 
 ## Getting Started
