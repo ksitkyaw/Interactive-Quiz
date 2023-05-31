@@ -73,7 +73,7 @@ const ButtonGroup = ({setShowAnswer, isPaused, setIsPaused} : ButtonProps) => {
       >
         Prev
       </button> */}
-      <div className="border rounded px-4 py-2 text-slate-600">
+      <div className="border-blue-500 rounded px-4 py-2 text-slate-600">
         Score: <span className="font-bold text-slate-600">{score}</span>
       </div>
       {endOfQuiz ? 

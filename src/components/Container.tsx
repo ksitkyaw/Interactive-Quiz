@@ -63,7 +63,7 @@ const Container = () => {
       <motion.h1 
       initial={{x : "-100vw"}}
       animate={{ x : 0}} 
-      className="text-center text-5xl mb-3 text-slate-700">
+      className="text-center sm:text-5xl text-3xl mb-3 text-slate-700">
         The Interactive Quiz
       </motion.h1>
       {/* <h2 className="text-center text-lg text-slate-500 mb-3">Guess the correct answer for each quiz, get a perfect score to receive a present</h2> */}
@@ -72,7 +72,7 @@ const Container = () => {
       initial={{opacity: 0}}
       animate={{opacity: 1}}
       transition={{duration: 2}}
-      className="w-3/5 min p-4 my-4 rounded-3xl bg-[#C4DFDF] shadow-[-4px -5px 12px 0px rgba(0,0,0,0.46) inset]">
+      className="sm:w-3/5 w-full min p-4 my-4 rounded-3xl bg-[#C4DFDF]">
         <ProgressBar bgColor='#93c4fd' completed={(currentQuizID + 1) * 10}/>
         {showAnswer ? 
           <Answer 

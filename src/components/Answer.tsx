@@ -44,7 +44,7 @@ export default function Answer({setShowAnswer, setPlayCountdown, playCountdown, 
     {/* {selectedChoice === quizData.correct_answer ? <div>Correct</div> : <div>Incorrect</div>} */}
     <Feedback/>
     <div className="flex items-center justify-between space-x-4">
-      <div className="border rounded px-4 py-2">
+      <div className="border-blue-500 border rounded px-4 py-2 text-slate-500">
         Score: <span className="font-bold">{score}</span>
       </div>
       <motion.button

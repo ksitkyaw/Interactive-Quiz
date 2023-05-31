@@ -5,8 +5,8 @@ module.exports = {
   ],
   theme: {
     extend: {
-      scale: {
-        '104': '1.04'
+      dropShadow: {
+        "big": "-4px -5px 12px 0px rgba(0,0,0,0.46) inset"
       }
     },
   },
